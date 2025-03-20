@@ -1,0 +1,126 @@
+
+/* This is my 4 cards at the the top */
+.product-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    height: 100%;
+    
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
+}
+
+.scroll-to-pricing {
+    cursor: pointer;
+}
+
+.navbar-brand {   
+   filter: brightness(0) invert(1); /* Keeps your existing filter */
+   transform: scale(350%);
+   margin-top: 18px;
+}
+
+/* END OF my 4 cards at the the top */
+
+/* _____________________________________________________________________________________________________ */
+
+/* NAV BAR*/
+
+.hero-wrapper {
+    min-height: 100vh;
+}
+
+.navbar {
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+/* END OF NAV BAR */
+
+/* _____________________________________________________________________________________________________ */
+
+/* BOTTOM CARDS Products */
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(0, 123, 255, 0.5);
+    cursor: pointer;
+}
+
+/* Animated Border Glow Effect */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 18px;
+    background: linear-gradient(45deg, #d1d8df, #727575);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    z-index: -1;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Gradient Overlay Effect */
+.card:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(242, 248, 255, 0.2), rgba(242, 248, 255, 0.2));
+    z-index: 1;
+    border-radius: 16px;
+}
+
+/* Soft Glow Pulse on Hover */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0px 15px 40px rgba(242, 248, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0px 20px 50px rgba(242, 248, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0px 15px 40px rgba(242, 248, 255, 0.2);
+    }
+}
+
+.card:hover {
+    animation: glowPulse 1.5s infinite alternate ease-in-out;
+}
+
+/* END OF CARDS */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-wrapper {
+        min-height: 90vh;
+        
+    }
+    
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.9) !important;
+    }
+    
+    .display-md-1 {
+        font-size: calc(1.625rem + 4.5vw) !important;
+    }
+
+    .logo-img {
+        transform: scale(70%);  
+        padding-bottom: 3px;    
+       
+    }  
+}
+
