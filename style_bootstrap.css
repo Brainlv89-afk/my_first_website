@@ -118,9 +118,13 @@
     }
 
     .logo-img {
-        transform: scale(70%);  
-        padding-bottom: 5px;
-        margin-left: 10px;           
+        padding-left: 16px;
+        /* Effect: The logo stays in place, but the image inside gets pushed to the right. 
+        Margin applies outside the element, padding inside
+        it creates space between the content and the element’s border.*/
+        padding-bottom: 5px;   
+        margin-top: 2px;  
+        
     }  
 }
 
