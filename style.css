@@ -35,7 +35,7 @@
 }
 
 .navbar {
-    z-index: 1000;
+    z-index: 10; /* Lower priority */
     transition: background-color 0.3s ease;
 }
 
@@ -44,11 +44,19 @@
 /* _____________________________________________________________________________________________________ */
 
 /* BOTTOM CARDS Products */
+.card {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    overflow: hidden;
+}
+
 .card:hover {
     transform: translateY(-10px) scale(1.03);
     box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
     border: 2px solid rgba(0, 123, 255, 0.5);
     cursor: pointer;
+    animation: glowPulse 1.5s infinite alternate ease-in-out;
 }
 
 /* Animated Border Glow Effect */
@@ -64,6 +72,7 @@
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
     z-index: -1;
+    
 }
 
 .card:hover::before {
@@ -81,6 +90,7 @@
     background: linear-gradient(135deg, rgba(242, 248, 255, 0.2), rgba(242, 248, 255, 0.2));
     z-index: 1;
     border-radius: 16px;
+    pointer-events: none;
 }
 
 /* Soft Glow Pulse on Hover */
@@ -101,6 +111,10 @@
 }
 
 /* END OF CARDS */
+
+#shoppingCart {
+    cursor: pointer;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

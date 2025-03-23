@@ -13,6 +13,9 @@ function submitEmail() {
         message.style.display = "block";
         message.style.color = "red";
         message.innerHTML = "❌ Please enter a valid email address.";
+        setTimeout(() => {
+            message.style.display = "none";
+        }, 10000);
         return;
     } 
 
@@ -35,8 +38,12 @@ function submitEmail() {
             message.style.color = "green";
             message.innerHTML = "✅ Thank you! Our representative will be in touch soon.";
             document.getElementById("emailInput").value = ""; // Clear input after successful submission
+            setTimeout(() => {
+                message.style.display = "none";
+            }, 10000);
         } else {
             throw new Error("Submission failed.");
+            
         }
     })
     .catch(error => {
@@ -44,5 +51,8 @@ function submitEmail() {
         message.style.display = "block";
         message.style.color = "red";
         message.innerHTML = "❌ Something went wrong. Please try again.";
+        setTimeout(() => {
+            message.style.display = "none";
+        }, 10000);
     });
 }
