@@ -1,40 +1,46 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let cartTotal = 0; // Stores total price
-    let cartItems = {}; // Stores items added to the cart
+    // Cart state
+    let cartTotal = 0;
+    let cartItems = {};
     const cartTotalElement = document.getElementById("cartTotal");
     const shoppingCart = document.getElementById("shoppingCart");
-
-    // Create cart dropdown
-    let cartDropdown = document.createElement("div");
-    cartDropdown.id = "cartDropdown";
-    cartDropdown.style.display = "none";
-    cartDropdown.innerHTML = `<ul id="cartItemsList"></ul><button id="completeOrder">Complete Order</button>`;
-    document.body.appendChild(cartDropdown);
+    const cartDropdown = document.getElementById("cartDropdown");
+    const cartItemsList = document.getElementById("cartItems");
+    const cartItemCount = document.getElementById("cartItemCount");
 
     // Function to update cart display
     function updateCartDisplay() {
         cartTotalElement.textContent = `€${cartTotal.toFixed(2)}`;
+        cartItemsList.innerHTML = "";
 
-        let cartItemsList = document.getElementById("cartItemsList");
-        cartItemsList.innerHTML = ""; // Clear the list
+        let totalItems = 0;
+        Object.keys(cartItems).forEach(item => {
+            totalItems += cartItems[item].quantity;
 
-        Object.keys(cartItems).forEach((item) => {
-            let listItem = document.createElement("li");
-            listItem.innerHTML = `<strong>${cartItems[item].quantity}x</strong> ${item} - €${(cartItems[item].quantity * cartItems[item].price).toFixed(2)}`;
+            const listItem = document.createElement("li");
+            listItem.classList.add("d-flex", "justify-content-between", "align-items-center", "py-2", "border-bottom");
+            listItem.innerHTML = `
+                <span>${item}</span>
+                <div>
+                    <span class="badge bg-secondary">${cartItems[item].quantity}x</span>
+                    <span class="fw-bold">€${(cartItems[item].quantity * cartItems[item].price).toFixed(2)}</span>
+                </div>
+            `;
             cartItemsList.appendChild(listItem);
         });
 
-        cartDropdown.style.display = "block"; // Show dropdown when an item is added
+        // Update cart item count
+        cartItemCount.textContent = totalItems;
+        cartItemCount.style.display = totalItems > 0 ? "inline-block" : "none";
     }
 
-    // Add event listener to all "Buy Now" buttons
-    document.querySelectorAll(".buy-now").forEach((button) => {
-        button.addEventListener("click", function () {
-            let price = parseFloat(button.getAttribute("data-price"));
-            let productName = button.closest(".card-body").querySelector("h3").textContent;
+    // Add to cart functionality
+    document.querySelectorAll(".buy-now").forEach(button => {
+        button.addEventListener("click", function() {
+            const price = parseFloat(button.dataset.price);
+            const productName = button.closest(".card-body").querySelector("h3").textContent;
 
             cartTotal += price;
-
             if (cartItems[productName]) {
                 cartItems[productName].quantity += 1;
             } else {
@@ -42,23 +48,38 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             updateCartDisplay();
-            
-            // Make the shopping cart "float"
-            shoppingCart.classList.add("floating");
+
+            // Animate the cart button
+            shoppingCart.classList.add("animate-cart");
+            setTimeout(() => shoppingCart.classList.remove("animate-cart"), 500);
+
+            // Show cart dropdown briefly
+            cartDropdown.style.display = "block";
+            setTimeout(() => { cartDropdown.style.display = "none"; }, 3000);
         });
     });
 
-    // Show cart dropdown when cart is clicked
-    shoppingCart.addEventListener("click", function () {
+    // Toggle cart dropdown
+    shoppingCart.addEventListener("click", function(e) {
+        e.stopPropagation();
         cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
     });
 
-    // Handle order completion
-    document.getElementById("completeOrder").addEventListener("click", function () {
-        alert("Thank you for your order!");
-        cartTotal = 0;
-        cartItems = {};
-        updateCartDisplay();
-        cartDropdown.style.display = "none";
+    // Complete order function
+    document.getElementById("completeOrder").addEventListener("click", function() {
+        if (cartTotal > 0) {
+            alert(`Order completed! Total: €${cartTotal.toFixed(2)}\nThank you for your purchase!`);
+            cartTotal = 0;
+            cartItems = {};
+            updateCartDisplay();
+            cartDropdown.style.display = "none";
+        }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(e) {
+        if (!shoppingCart.contains(e.target)) {
+            cartDropdown.style.display = "none";
+        }
     });
 });

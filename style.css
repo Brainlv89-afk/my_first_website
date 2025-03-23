@@ -43,6 +43,26 @@
 
 /* _____________________________________________________________________________________________________ */
 
+
+/* Buy button */
+
+.buy-now {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.buy-now:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+.buy-now:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+/* End ofbutton */
+
+
+/* _____________________________________________________________________________________________________ */
+
+
 /* BOTTOM CARDS Products */
 .card {
     position: relative;
@@ -142,3 +162,52 @@
     }  
 }
 
+
+/* Styling for the cart dropdown */
+#cartDropdown {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+}
+
+#cartDropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#cartDropdown ul li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+#cartDropdown ul li:last-child {
+    border-bottom: none;
+}
+
+#completeOrder {
+    display: block;
+    width: 100%;
+    background: green;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#completeOrder:hover {
+    background: darkgreen;
+}
