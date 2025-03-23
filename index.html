@@ -15,12 +15,23 @@
 
 </head>
 <body>
-        <!-- Scripts -->        
-        <script src="searchbar.js"></script>
-        <script src="watch&order-button.js"></script>  
-        <script src="4-buttons.js"></script>    
-        <script src="email.js "></script>
-        <script src="buy.js"></script>
+      <!-- Scripts -->        
+      <script src="searchbar.js"></script>
+      <script src="watch&order-button.js"></script>  
+      <script src="4-buttons.js"></script>    
+      <script src="email.js"></script> <!-- Remove extra space in filename -->
+      <script src="buy.js"></script>
+  
+      <!-- EmailJS Library (Only Include One) -->
+      <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+      <script>
+          (function() {
+              emailjs.init("9uiw-rCIO8QapeZCT"); 
+          })();
+      </script>
+  </body>
+       
         <!-- End of Scripts -->
 
 <!-- Navbar -->
@@ -41,29 +52,46 @@
     <div class="d-flex align-items-center gap-2">
 
             <!-- Search -->
-            <div class="position-relative">
-                <div class="input-group me-2 d-none d-md-flex ">
-                    <input type="text" class="form-control" id="search-input" placeholder="Search products">
-                    <button class="btn btn-outline-light" id="search-btn" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <!-- Bootstrap-styled Search Results Dropdown -->
-                <div class="dropdown-menu w-100" id="search-results"></div>
-            </div>
+            <div class="container">
+                <div class="d-flex justify-content-end align-items-center gap-3">
+                    <!-- Search -->
+                    <div class="position-relative">
+                        <div class="input-group me-2 d-none d-md-flex">
+                            <input type="text" class="form-control" id="search-input" placeholder="Search products">
+                            <button class="btn btn-outline-light" id="search-btn" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
 
-            <!-- Cart -->
-            <div class="d-flex flex-column align-items-center text-white" id="shoppingCart">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cartTotal">€0.00</span>
-                <div id="cartDropdown" class="dropdown-menu dropdown-menu-end p-3 shadow-lg" style="display: none; min-width: 250px;">
-                    <ul id="cartItems" class="list-unstyled mb-2"></ul>
-                    <button id="completeOrder" class="btn btn-dark">Complete Order</button>
-                </div>
-            </div>
+                        <!-- Bootstrap-styled Search Results Dropdown -->
+                        <div class="dropdown-menu w-100" id="search-results"></div>
+                    </div>
         
+        <!-- Shopping Cart -->
+<!-- Shopping Cart -->
+<div class="d-flex flex-column align-items-center text-white" id="shoppingCart">
+    <i class="fas fa-shopping-cart fs-5"></i>
+    <span id="cartTotal">€0.00</span>
+    <div id="cartDropdown" class="dropdown-menu dropdown-menu-end p-3 shadow-lg" style="display: none; min-width: 300px;">
+        <ul id="cartItems" class="list-unstyled mb-3"></ul>
+        
+        <!-- Total Price Display -->
+        <div class="d-flex justify-content-between fw-bold">
+            <span>Total:</span>
+            <span id="cartTotalDropdown">€0.00</span>
         </div>
+
+        <!-- Email Input -->
+        <div class="mb-3">
+            <label for="orderEmail" class="form-label">Confirmation Email</label>
+            <input type="email" class="form-control" id="orderEmail" 
+                   placeholder="name@example.com" required>
+        </div>
+
+        <!-- Complete Order Button -->
+        <button id="completeOrder" class="btn btn-dark w-100">Complete Order</button>
     </div>
+</div>
 </nav>
 
 <!-- Hero Content -->
@@ -431,32 +459,25 @@
 <!-- Enquire Section -->
 <div class="container mb-3 mt-2 mt-md-5">
     <div class="row align-items-center">
-        
         <div class="col-md-6">
             <h2 class="h1">Enquire <span class="text-warning">Now</span></h2>
         </div>
         <div class="col-md-6">
             <div class="input-group">
-                <input type="email" id="emailInput" class="form-control form-control-lg" placeholder="Your email address">
-                <button class="btn btn-warning btn-lg" type="button" id="submitButton">
+                <input type="email" id="emailInput" 
+                       class="form-control form-control-lg" 
+                       placeholder="Your email address">
+                <button class="btn btn-warning btn-lg" 
+                        type="button" 
+                        onclick="handleEnquiry()"
+                        id="submitButton">
                     Submit
                 </button>
             </div>
-                <p id="message" class="mt-2 fw-bold" style="display: none;"></p>
+            <p id="message" class="mt-2 fw-bold" style="display: none;"></p>
         </div>
     </div>
 </div>
-
-<!-- Hidden Form for FormSubmit -->
-<form id="emailForm" action="https://formsubmit.co/marketplace@scanum.co.uk" method="POST">
-    <input type="hidden" name="name" id="hiddenName">
-    <input type="hidden" name="email" id="hiddenEmail">
-    <input type="hidden" name="_cc" id="ccEmail"> 
-    <input type="hidden" name="_subject" value="New Email Inquiry!">
-    <input type="hidden" name="_autoresponse" value="Thank you for contacting us! Our representative will be in touch within 48 hours.">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-</form>
 
 
 <!-- Footer -->
