@@ -80,7 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cartTotal > 0 && userEmail) {
             sendConfirmationEmail(userEmail); // Call EmailJS function
 
-            alert(`Order completed! Total: €${cartTotal.toFixed(2)}\nConfirmation sent to ${userEmail}`);
+            alert(`Order completed! Total: €${cartTotal.toFixed(2)}
+A confirmation email has been sent to ${userEmail}.
+Our customer representative will contact you within 48 hours to finalize delivery fees and transportation details.`);
+            
             cartTotal = 0;
             cartItems = {};
             updateCartDisplay();
@@ -98,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function sendConfirmationEmail(userEmail) {
-        const orderId = Math.floor(Math.random() * 1000000); // Random order ID (you can improve this later)
+        const orderId = Math.floor(Math.random() * 1000000); // Random order ID
 
         // Convert cartItems object into an array of item objects expected by EmailJS
         const orders = Object.keys(cartItems).map(itemName => {
@@ -115,10 +118,11 @@ document.addEventListener("DOMContentLoaded", function () {
             order_id: orderId,
             orders: orders,
             cost: {
-                shipping: "0.00", // You can calculate this dynamically
-                tax: "0.00",      // Or apply a formula here
+                shipping: "TBD", // Delivery fees will be finalized later
+                tax: "0.00",     
                 total: cartTotal.toFixed(2)
-            }
+            },
+            message: `Thank you for your order! Our customer representative will contact you within 48 hours to finalize delivery fees and transportation details.`
         };
 
         emailjs.send("service_edjpflq", "template_sli2rr8", emailParams)
