@@ -21,7 +21,7 @@ function handleEnquiry() {
 
     // Encode special characters for mailto link
     const subject = encodeURIComponent('Website Enquiry');
-    const body = encodeURIComponent(`Please contact me at: ${email}\n\n[Your message here]`);
+    const body = encodeURIComponent(`Please contact us at: marketplace@scanum.co.uk\n\n [Your message here]`);
     
     // Create mailto link
     const mailtoLink = `mailto:marketplace@scanum.co.uk?subject=${subject}&body=${body}`;
