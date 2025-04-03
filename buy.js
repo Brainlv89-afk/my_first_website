@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const shoppingCart = document.getElementById("shoppingCart");
     const cartDropdown = document.getElementById("cartDropdown");
     const cartItemsList = document.getElementById("cartItems");
+    const purchaseNotification = document.getElementById("purchaseNotification");
+    const closeNotification = document.getElementById("closeNotification");
 
     function updateCartDisplay() {
         cartTotalElement.textContent = `€${cartTotal.toFixed(2)}`;
@@ -23,8 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
                 <button class="btn btn-danger btn-sm remove-item" 
-                        data-product="${item}"
-                        aria-label="Remove item">
+                        data-product="${item}" aria-label="Remove item">
                     ×
                 </button>
             `;
@@ -58,11 +59,22 @@ document.addEventListener("DOMContentLoaded", function () {
             cartTotal += price;
 
             updateCartDisplay();
+
+            // Show the purchase notification
+            purchaseNotification.classList.remove("d-none");
+            setTimeout(() => {
+                purchaseNotification.classList.add("d-none");
+            }, 3000); // Hide notification after 3 seconds
+
             shoppingCart.classList.add("animate-cart");
             setTimeout(() => shoppingCart.classList.remove("animate-cart"), 500);
 
             cartDropdown.style.display = "block";
         });
+    });
+
+    closeNotification.addEventListener("click", function () {
+        purchaseNotification.classList.add("d-none");
     });
 
     shoppingCart.addEventListener("click", function (e) {
@@ -83,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert(`Order completed! Total: €${cartTotal.toFixed(2)}
 A confirmation email has been sent to ${userEmail}.
 Our customer representative will contact you within 48 hours to finalize delivery fees and transportation details.`);
-            
+
             cartTotal = 0;
             cartItems = {};
             updateCartDisplay();
@@ -109,7 +121,7 @@ Our customer representative will contact you within 48 hours to finalize deliver
                 name: itemName,
                 units: cartItems[itemName].quantity,
                 price: (cartItems[itemName].price * cartItems[itemName].quantity).toFixed(2),
-                image_url: "https://via.placeholder.com/64" // Replace with real product images if you have them
+                
             };
         });
 
@@ -119,7 +131,7 @@ Our customer representative will contact you within 48 hours to finalize deliver
             orders: orders,
             cost: {
                 shipping: "TBD", // Delivery fees will be finalized later
-                tax: "0.00",     
+                tax: "0.00",
                 total: cartTotal.toFixed(2)
             },
             message: `Thank you for your order! Our customer representative will contact you within 48 hours to finalize delivery fees and transportation details.`

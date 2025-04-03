@@ -67,7 +67,13 @@
                         <div class="dropdown-menu w-100" id="search-results"></div>
                     </div>
         
-        <!-- Shopping Cart -->
+        <!-- Notification Container -->
+<div id="purchaseNotification" class="d-none position-fixed bottom-0 start-50 translate-middle-x mb-3 p-3 bg-success text-white rounded-3 shadow-lg" style="z-index: 9999;">
+    <span>Your item has been added to the cart! </span>
+    <a href="#shoppingCart" class="text-white fw-bold ms-2">Go to Cart</a>
+    <button id="closeNotification" class="btn-close btn-close-white btn-sm ms-3" aria-label="Close"></button>
+</div>
+
 <!-- Shopping Cart -->
 <div class="d-flex flex-column align-items-center text-white" id="shoppingCart">
     <i class="fas fa-shopping-cart fs-5"></i>
