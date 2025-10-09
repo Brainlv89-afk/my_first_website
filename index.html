@@ -1,226 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer-when-downgrade">
-<title>SIA Gaujas Koks</title>
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=Mukta:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title>SIA Gaujas Koks</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=Mukta:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
-      <!-- Scripts -->        
-      <script src="searchbar.js"></script>
-      <script src="watch&order-button.js"></script>  
-      <script src="4-buttons.js"></script>    
-      <script src="email.js"></script> <!-- Remove extra space in filename -->
-      <script src="buy.js"></script>
-  
-      <!-- EmailJS Library (Only Include One) -->
-      <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  
-      <script>
-          (function() {
-              emailjs.init("9uiw-rCIO8QapeZCT"); 
-          })();
-      </script>
-  </body>
-       
-        <!-- End of Scripts -->
+    <!-- Scripts -->
+    <script src="classes/BuyHandler.js"></script>
+    <script src="classes/ProductSearchBar.js"></script>
+    <script src="classes/EnquiryHandler.js"></script>
+    <script src="classes/WatchButtonHandler.js"></script>
+    <script src="classes/OrderButtonHandler.js"></script>
+    <script src="classes/ProductScroller.js"></script>
+    <script src="main.js"></script>
+
+    <!-- EmailJS Library (Only Include One) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        (function () {
+            emailjs.init("9uiw-rCIO8QapeZCT");
+        })();
+    </script>
+</body>
+
+<!-- End of Scripts -->
 
 <!-- Navbar -->
 <!-- Combined Navbar & Hero Section -->
 <div class="hero-wrapper position-relative vh-100">
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark position-absolute top-0 start-0 w-100 bg-transparent py-3">
-    <div class="container">
-        <a class="navbar-brand d-flex justify-content-center" href="#">
-            <img src="images/gaujas_koks_white.png" alt="Logo" class="logo-img" style="height: 50px; margin-left: 5px;">
-        </a>
-        
-        <div class="d-flex align-items-center">
-        
-        <!-- Search -->
-        <!-- Parent container with spacing -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark position-absolute top-0 start-0 w-100 bg-transparent py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex justify-content-center" href="#">
+                <img src="images/gaujas_koks_white.png" alt="Logo" class="logo-img"
+                    style="height: 50px; margin-left: 5px;">
+            </a>
 
-    <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center">
 
-            <!-- Search -->
-            <div class="container">
-                <div class="d-flex justify-content-end align-items-center gap-3">
+                <!-- Search -->
+                <!-- Parent container with spacing -->
+
+                <div class="d-flex align-items-center gap-2">
+
                     <!-- Search -->
-                    <div class="position-relative">
-                        <div class="input-group me-2 d-none d-md-flex">
-                            <input type="text" class="form-control" id="search-input" placeholder="Search products">
-                            <button class="btn btn-outline-light" id="search-btn" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                    <div class="container">
+                        <div class="d-flex justify-content-end align-items-center gap-3">
+                            <!-- Search -->
+                            <div class="position-relative">
+                                <div class="input-group me-2 d-none d-md-flex">
+                                    <input type="text" class="form-control" id="search-input"
+                                        placeholder="Search products">
+                                    <button class="btn btn-outline-light" id="search-btn" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
 
-                        <!-- Bootstrap-styled Search Results Dropdown -->
-                        <div class="dropdown-menu w-100" id="search-results"></div>
-                    </div>
-        
-        <!-- Notification Container -->
-        <div id="purchaseNotification" 
-        class="d-none position-fixed bottom-0 start-50 translate-middle-x mb-3 p-2 bg-success text-white rounded-3 shadow-lg d-flex flex-column align-items-center text-center small"
-        style="z-index: 9999; min-width: 200px; max-width: 80%;">
-       <span>Item added to cart!</span>
-       <a href="#" class="text-white fw-bold mt-1">Go to Cart</a>
-       <button id="closeNotification" class="btn-close btn-close-white btn-sm mt-2" aria-label="Close"></button>
-   </div>
+                                <!-- Bootstrap-styled Search Results Dropdown -->
+                                <div class="dropdown-menu w-100" id="search-results"></div>
+                            </div>
 
-<!-- Shopping Cart -->
-<div class="d-flex flex-column align-items-center text-white" id="shoppingCart">
-    <i class="fas fa-shopping-cart fs-5"></i>
-    <span id="cartTotal">€0.00</span>
-    <div id="cartDropdown" class="dropdown-menu dropdown-menu-end p-3 shadow-lg" style="display: none; min-width: 300px;">
-        <ul id="cartItems" class="list-unstyled mb-3"></ul>
-        
-        <!-- Total Price Display -->
-        <div class="d-flex justify-content-between fw-bold">
-            <span>Total:</span>
-            <span id="cartTotalDropdown">€0.00</span>
-        </div>
+                            <!-- Notification Container -->
+                            <div id="purchaseNotification"
+                                class="d-none position-fixed bottom-0 start-50 translate-middle-x mb-3 p-2 bg-success text-white rounded-3 shadow-lg d-flex flex-column align-items-center text-center small"
+                                style="z-index: 9999; min-width: 200px; max-width: 80%;">
+                                <span>Item added to cart!</span>
+                                <a href="#" class="text-white fw-bold mt-1">Go to Cart</a>
+                                <button id="closeNotification" class="btn-close btn-close-white btn-sm mt-2"
+                                    aria-label="Close"></button>
+                            </div>
 
-        <!-- Email Input -->
-        <div class="mb-3">
-            <label for="orderEmail" class="form-label">Confirmation Email</label>
-            <input type="email" class="form-control" id="orderEmail" 
-                   placeholder="name@example.com" required>
-        </div>
+                            <!-- Shopping Cart -->
+                            <div class="d-flex flex-column align-items-center text-white" id="shoppingCart">
+                                <i class="fas fa-shopping-cart fs-5"></i>
+                                <span id="cartTotal">€0.00</span>
+                                <div id="cartDropdown" class="dropdown-menu dropdown-menu-end p-3 shadow-lg"
+                                    style="display: none; min-width: 300px;">
+                                    <ul id="cartItems" class="list-unstyled mb-3"></ul>
 
-        <!-- Complete Order Button -->
-        <button id="completeOrder" class="btn btn-dark w-100">Complete Order</button>
+                                    <!-- Total Price Display -->
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Total:</span>
+                                        <span id="cartTotalDropdown">€0.00</span>
+                                    </div>
+
+                                    <!-- Email Input -->
+                                    <div class="mb-3">
+                                        <label for="orderEmail" class="form-label">Confirmation Email</label>
+                                        <input type="email" class="form-control" id="orderEmail"
+                                            placeholder="name@example.com" required>
+                                    </div>
+
+                                    <!-- Complete Order Button -->
+                                    <button id="completeOrder" class="btn btn-dark w-100">Complete Order</button>
+                                </div>
+                            </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <div class="background-image position-absolute top-0 start-0 w-100 h-100">
+        <img src="images/factory1.png" class="w-100 h-100 object-fit-cover" alt="Factory Background">
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
     </div>
-</div>
-</nav>
 
-<!-- Hero Content -->
-<div class="background-image position-absolute top-0 start-0 w-100 h-100">
-    <img src="images/factory1.png" class="w-100 h-100 object-fit-cover" alt="Factory Background">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-</div>
-
-<div class="container position-relative h-100">
-    <div class="row h-100 align-items-center justify-content-center text-center text-white">
-        <div class="col-12 col-lg-8">
-            <h1 class="display-2 display-md-1 mb-4 fw-bold">Wood Products</h1>
-            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center w-100">
-                <a href="tel:+1234567890" class="btn btn-warning btn-lg w-100 px-4 px-md-5 py-3">
-                    Call Sales Team
-                </a>
-                <button class="btn btn-outline-light btn-lg w-100 px-4 px-md-5 py-3" id="ordernow">
-                    Order Now
-                </button>
+    <div class="container position-relative h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center text-white">
+            <div class="col-12 col-lg-8">
+                <h1 class="display-2 display-md-1 mb-4 fw-bold">Wood Products</h1>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center w-100">
+                    <a href="tel:+1234567890" class="btn btn-warning btn-lg w-100 px-4 px-md-5 py-3">
+                        Call Sales Team
+                    </a>
+                    <button class="btn btn-outline-light btn-lg w-100 px-4 px-md-5 py-3" id="ordernow">
+                        Order Now
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Products Section -->
 <section class="products py-5">
-<div class="container">
-    <div class="products-top text-center mb-5">
-        <h3 class="text-muted mb-3">Search For</h3>
-        <h2 class="display-4 text-primary">Wide Range of Products</h2>
-    </div>
-
-    <!-- EU Badge -->
-    <div class="text-center mb-5">
-        <img src="images/madeineu.png" alt="EU" class="img-fluid" style="max-width: 200px;">
-    </div>
-
-    <div class="row g-4 justify-content-center">
-        <!-- Timber -->
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="product-card text-center p-4 scroll-to-product" 
-                    data-target="timber-section"
-                    style="cursor: pointer;">
-                <img src="images/wood_4930376.png" alt="Timber" 
-                        class="img-fluid mb-3" style="max-height: 120px;">
-                <span class="h5 d-block">Timber</span>
-            </div>
+    <div class="container">
+        <div class="products-top text-center mb-5">
+            <h3 class="text-muted mb-3">Search For</h3>
+            <h2 class="display-4 text-primary">Wide Range of Products</h2>
         </div>
 
-        <!-- Wood Logs -->
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="product-card text-center p-4 scroll-to-product" 
-                    data-target="wood-logs-section"
-                    style="cursor: pointer;">
-                <img src="images/axe_6929031.png" alt="Wood Logs" 
-                        class="img-fluid mb-3" style="max-height: 120px;">
-                <span class="h5 d-block">Wood Logs</span>
-            </div>
+        <!-- EU Badge -->
+        <div class="text-center mb-5">
+            <img src="images/madeineu.png" alt="EU" class="img-fluid" style="max-width: 200px;">
         </div>
 
-        <!-- Wood Pellets -->
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="product-card text-center p-4 scroll-to-product" 
-                    data-target="wood-pellets-section"
+        <div class="row g-4 justify-content-center">
+            <!-- Timber -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="product-card text-center p-4 scroll-to-product" data-target="timber-section"
                     style="cursor: pointer;">
-                <img src="images/package_5037433.png" alt="Wood Pellets" 
-                        class="img-fluid mb-3" style="max-height: 120px;">
-                <span class="h5 d-block">Wood Pellets</span>
+                    <img src="images/wood_4930376.png" alt="Timber" class="img-fluid mb-3" style="max-height: 120px;">
+                    <span class="h5 d-block">Timber</span>
+                </div>
             </div>
-        </div>
 
-        <!-- Prefabricated Wall Panels -->
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="product-card text-center p-4 scroll-to-product" 
-                    data-target="wall-panels-section"
+            <!-- Wood Logs -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="product-card text-center p-4 scroll-to-product" data-target="wood-logs-section"
                     style="cursor: pointer;">
-                <img src="images/cabin_12460715.png" alt="Wall Panels" 
-                        class="img-fluid mb-3" style="max-height: 120px;">
-                <span class="h5 d-block">Prefabricated Wall Panels</span>
+                    <img src="images/axe_6929031.png" alt="Wood Logs" class="img-fluid mb-3" style="max-height: 120px;">
+                    <span class="h5 d-block">Wood Logs</span>
+                </div>
+            </div>
+
+            <!-- Wood Pellets -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="product-card text-center p-4 scroll-to-product" data-target="wood-pellets-section"
+                    style="cursor: pointer;">
+                    <img src="images/package_5037433.png" alt="Wood Pellets" class="img-fluid mb-3"
+                        style="max-height: 120px;">
+                    <span class="h5 d-block">Wood Pellets</span>
+                </div>
+            </div>
+
+            <!-- Prefabricated Wall Panels -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="product-card text-center p-4 scroll-to-product" data-target="wall-panels-section"
+                    style="cursor: pointer;">
+                    <img src="images/cabin_12460715.png" alt="Wall Panels" class="img-fluid mb-3"
+                        style="max-height: 120px;">
+                    <span class="h5 d-block">Prefabricated Wall Panels</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 
-    
+
 </div>
 <!-- Factory Section -->
 <section class="bg-light py-5">
-<div class="container">
-    <div class="row mb-5">
-        <div class="col-md-6">
-            <img src="images/factory2.png" class="img-fluid" alt="Factory">
-        </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <div class="text-center">
-                <h1 class="display-5">Since 1990 Your Trusted Manufacturer</h1>
-                <button class="btn btn-primary btn-lg mt-3" id="watch-promo-btn">Watch Promo</button>
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <img src="images/factory2.png" class="img-fluid" alt="Factory">
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                    <h1 class="display-5">Since 1990 Your Trusted Manufacturer</h1>
+                    <button class="btn btn-primary btn-lg mt-3" id="watch-promo-btn">Watch Promo</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Video Section -->
-    <div class="row mb-5 justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-            <div class="ratio ratio-16x9" id="promo-video">
-                <iframe 
-                    id="promo-iframe"  
-                    src="https://www.youtube.com/embed/OgzeQf5i7TY" 
-                    title="Gaujas Koks Krustpils"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+        <!-- Video Section -->
+        <div class="row mb-5 justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="ratio ratio-16x9" id="promo-video">
+                    <iframe id="promo-iframe" src="https://www.youtube.com/embed/OgzeQf5i7TY"
+                        title="Gaujas Koks Krustpils"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
-        
-<!-- Products-->        
+
+<!-- Products-->
 <section class="container py-5" id="Prircing-cards">
     <div class="row g-4 justify-content-center">
         <!-- Decking -->
@@ -231,7 +232,7 @@
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->      
+                    </div> -->
                     <img src="images/decking_1.jpeg" class="img-fluid rounded" alt="Decking">
                     <h3 class="mt-3">Decking</h3>
                     <p class="text-muted">High-quality wooden decking for patios, gardens, and outdoor spaces.</p>
@@ -240,7 +241,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>                            
+                        <i class="fa-solid fa-star"></i>
                     </div>
                     <div>
                         <button class="btn btn-primary btn-sm mt-2 buy-now" data-price="16.99">Buy Now</button>
@@ -254,11 +255,11 @@
         <div class="col-md-4 d-flex">
             <div class="card border-0 shadow-sm w-100">
                 <div class="card-body text-center">
-                       <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->   
+                    </div> -->
                     <img src="images/struct_timb_2_1.png" class="img-fluid rounded" alt="Timber">
                     <h3 class="mt-3">Timber</h3>
                     <p class="text-muted">Premium-grade structural timber for construction and DIY projects.</p>
@@ -281,11 +282,11 @@
         <div class="col-md-4 d-flex">
             <div class="card border-0 shadow-sm w-100">
                 <div class="card-body text-center">
-                         <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->   
+                    </div> -->
                     <img src="images/side_boards.jpeg" class="img-fluid rounded" alt="Boards">
                     <h3 class="mt-3">Boards</h3>
                     <p class="text-muted">Durable wooden boards perfect for flooring, walls, and furniture making.</p>
@@ -308,11 +309,11 @@
         <div class="col-md-4 d-flex">
             <div class="card border-0 shadow-sm w-100">
                 <div class="card-body text-center">
-                        <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->   
+                    </div> -->
                     <img src="images/bat.jpeg" class="img-fluid rounded" alt="Roof Battens">
                     <h3 class="mt-3">Roof Battens</h3>
                     <p class="text-muted">Strong and durable roof battens for optimal support and longevity.</p>
@@ -335,12 +336,13 @@
         <div class="col-md-4 d-flex">
             <div class="card border-0 shadow-sm w-100">
                 <div class="card-body text-center">
-                        <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->   
-                    <img src="images/granules.PNG" class="img-fluid rounded mt-3" alt="Wood Pellets" style="max-height: 260px; width: auto;">
+                    </div> -->
+                    <img src="images/granules.PNG" class="img-fluid rounded mt-3" alt="Wood Pellets"
+                        style="max-height: 260px; width: auto;">
                     <h3 class="mt-3">Wood Pellets</h3>
                     <p class="text-muted">Eco-friendly and efficient wood pellets for heating and biomass energy.</p>
                     <div class="text-warning">
@@ -362,11 +364,11 @@
         <div class="col-md-4 d-flex">
             <div class="card border-0 shadow-sm w-100">
                 <div class="card-body text-center">
-                       <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->   
+                    </div> -->
                     <img src="images/malka.jpg" class="img-fluid rounded" alt="Wood Logs">
                     <h3 class="mt-3">Wood Logs</h3>
                     <p class="text-muted">Premium firewood logs for long-lasting, high-heat burning efficiency.</p>
@@ -389,11 +391,11 @@
         <div class="col-md-4 d-flex justify-content-center">
             <div class="card border-0 shadow-sm w-100">
                 <div class="card-body text-center">
-                        <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <i class="fa-solid fa-link me-2"></i>
                         <i class="fa-regular fa-heart me-2"></i>
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    </div> -->   
+                    </div> -->
                     <img src="images/house.PNG" class="img-fluid rounded" alt="Prefabricated Wall Panels">
                     <h3 class="mt-3">Prefabricated Wall Panels</h3>
                     <p class="text-muted">Easy-to-install wall panels for modern, energy-efficient construction.</p>
@@ -416,90 +418,87 @@
 
 <!-- Certificates Section -->
 <section class="py-3 py-md-5 bg-dark text-white">
-<div class="container">
-    
-    <div class="row">
-        <div class="col-12 text-center"> <!-- Negative margin to move it up -->
-            <h2 class="display-5">Quality Certificates</h2>
-        </div>
-    </div>
-
-    <!-- Certificate List -->
-    <div class="row align-items-start mt-4">
-        <!-- Left Column -->
-        <div class="col-md-6">
-            <div class="d-grid gap-2">
-                <div class="d-flex align-items-center gap-2">
-                    <span class="h2">01</span>
-                    <span>BS 5534:2014+A2:2018</span>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="h2">02</span>
-                    <span>EN Plus</span>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="h2">03</span>
-                    <span>BS 5534:2014+A2:2018</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column -->
-        <div class="col-md-6">
-            <div class="d-grid gap-2">
-                <div class="d-flex align-items-center gap-2">
-                    <span class="h2">04</span>
-                    <span>EN Plus sertifikāts A1 LV017</span>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="h2">05</span>
-                    <span>PEFC/12-31-052</span>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="h2">06</span>
-                    <span>UKCA BS EN 14081-1:2005+A1:2011</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>    
-
-<!-- Enquire Section -->
-<div class="container mb-3 mt-2 mt-md-5">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2 class="h1">Enquire <span class="text-warning">Now</span></h2>
-        </div>
-        <div class="col-md-6">
-            <div class="input-group">
-                <input type="email" id="emailInput" 
-                       class="form-control form-control-lg" 
-                       placeholder="Your email address">
-                <button class="btn btn-warning btn-lg" 
-                        type="button" 
-                        onclick="handleEnquiry()"
-                        id="submitButton">
-                    Submit
-                </button>
-            </div>
-            <p id="message" class="mt-2 fw-bold" style="display: none;"></p>
-        </div>
-    </div>
-</div>
-
-
-<!-- Footer -->
-<footer class="py-4 bg-secondary text-white">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0">&copy; 2025 Gaujas Koks</p>
-            <div class="d-flex align-items-center gap-2">
-                <i class="fas fa-tree"></i>
-                <span class="h5 mb-0">WOOD PRODUCTS</span>
+
+        <div class="row">
+            <div class="col-12 text-center"> <!-- Negative margin to move it up -->
+                <h2 class="display-5">Quality Certificates</h2>
+            </div>
+        </div>
+
+        <!-- Certificate List -->
+        <div class="row align-items-start mt-4">
+            <!-- Left Column -->
+            <div class="col-md-6">
+                <div class="d-grid gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="h2">01</span>
+                        <span>BS 5534:2014+A2:2018</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="h2">02</span>
+                        <span>EN Plus</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="h2">03</span>
+                        <span>BS 5534:2014+A2:2018</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6">
+                <div class="d-grid gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="h2">04</span>
+                        <span>EN Plus sertifikāts A1 LV017</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="h2">05</span>
+                        <span>PEFC/12-31-052</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="h2">06</span>
+                        <span>UKCA BS EN 14081-1:2005+A1:2011</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</footer>  
 
-</body>
+    <!-- Enquire Section -->
+    <div class="container mb-3 mt-2 mt-md-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="h1">Enquire <span class="text-warning">Now</span></h2>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="email" id="emailInput" class="form-control form-control-lg"
+                        placeholder="Your email address">
+                    <button class="btn btn-warning btn-lg" type="button" id="submitButton">
+                        Submit
+                    </button>
+                </div>
+                <p id="message" class="mt-2 fw-bold" style="display: none;"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="py-4 bg-secondary text-white">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0">&copy; 2025 Gaujas Koks</p>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fas fa-tree"></i>
+                    <span class="h5 mb-0">WOOD PRODUCTS</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </body>
+
 </html>
