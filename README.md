@@ -1,4 +1,4 @@
-# Website Selling One Products 
+# Website Selling One Product
 
 ## Overview
 
