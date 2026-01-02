@@ -1,5 +1,6 @@
-# Website Selling One Product
+# Website Selling Products/Marketplace
 
+https://brainlv89-afk.github.io/my_first_website/
 ## Overview
 
 This project is a modular, object-oriented JavaScript web application for an online timber marketplace.  
